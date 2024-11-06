@@ -1,25 +1,41 @@
 import { Card, Text, Group, Badge, Image } from "@mantine/core";
+import { NavLink } from "react-router-dom";
 
 const ArticleCard = ({ article }) => {
+  if (!article?.article_id) {
+    return <h2>💀 Article not found 💀</h2>;
+  }
   return (
-    <Card withBorder shadow="m" padding="md" component="a" href="#" h="100%">
+    <Card
+      withBorder
+      shadow="m"
+      padding="md"
+      radius="md"
+      h="100%"
+      component={NavLink}
+      to={`/article/${article.article_id}`}
+    >
       <Card.Section>
-        <Image src={article.article_img_url} height={160} alt={article.title} />
+        <Image
+          src={article.article_img_url}
+          height={160}
+          alt={article.title || "Article Image"}
+        />
       </Card.Section>
 
       <Group mt="md" mb="s">
         <Text fw={500} size="lg">
-          {article.title}
+          {article.title || "Untitled Article"}
         </Text>
-        <Badge>{article.topic}</Badge>
+        <Badge>{article.topic || "No Topic"}</Badge>
       </Group>
 
-      <Text mt="s" c="dimmed" size="sm">
-        {article.body}
-        {article.author}
-      </Text>
-
-      <Text>{article.votes}</Text>
+      <Group position="apart">
+        <Text c="dimmed" size="sm">
+          {article.author || "Unknown Author"}
+        </Text>
+        <Text>{article.votes ?? 0} Votes</Text>
+      </Group>
     </Card>
   );
 };
