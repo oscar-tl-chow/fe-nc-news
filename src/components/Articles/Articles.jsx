@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Grid } from "@mantine/core";
 import { getArticles } from "../../api";
-import ArticleCard from "./ArticleCard";
+import { Grid } from "@mantine/core";
+import ArticleCard from "./ArticleCard.jsx";
+import Loading from "../Loading";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
@@ -11,6 +12,8 @@ const Articles = () => {
       setArticles(articlesResponse);
     });
   }, []);
+
+  if (articles.length === 0) return <Loading />;
 
   return (
     <Grid>

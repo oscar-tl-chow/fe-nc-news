@@ -9,8 +9,9 @@ import {
   Text,
   NavLink,
 } from "@mantine/core";
-import ArticleCard from "./components/articles/ArticleCard.jsx";
-import Articles from "./components/articles/Articles.jsx";
+import Articles from "./components/Articles/Articles.jsx";
+import SingleArticle from "./components/SingleArticle/SingleArticle.jsx";
+import Error from "./components/Error.jsx";
 
 const theme = createTheme({
   defaultRadius: "2rem",
@@ -38,7 +39,8 @@ function App() {
         <AppShell.Main>
           <Routes>
             <Route path="/" element={<Articles />} />
-            <Route path="/article/:article_id" element={<ArticleCard />} />
+            <Route path="/article/:article_id" element={<SingleArticle />} />
+            <Route path="*" element={<Error />} />
           </Routes>
         </AppShell.Main>
       </AppShell>
