@@ -2,7 +2,7 @@ import { Text } from "@mantine/core";
 
 const Error = ({ error }) => {
   if (!error) {
-    return <Text size="xl">Please try again later.</Text>;
+    return <Text size="xl">💀Please try again later.💀</Text>;
   }
 
   const response = error.response;
@@ -11,7 +11,7 @@ const Error = ({ error }) => {
 
   return (
     <Text size="xl">
-      An error has occurred with status {status}: {message}
+      ❗An error has occurred with status {status}: {message}❗
     </Text>
   );
 };

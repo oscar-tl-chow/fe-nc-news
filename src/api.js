@@ -8,11 +8,20 @@ export const getArticles = () => {
     return response.data?.articles;
   });
 };
+
 export const getSingleArticle = (articleId) => {
   console.log("fetching article id: ", articleId);
   const singleArticleURL = `${ncNews}/api/articles/${articleId}`;
   return axios.get(singleArticleURL).then((response) => {
     console.log(response);
     return response.data?.article;
+  });
+};
+
+export const getComments = (articleId) => {
+  const articleCommentsURL = `${ncNews}/api/articles/${articleId}/comments`;
+  return axios.get(articleCommentsURL).then((response) => {
+    console.log(response);
+    return response.data?.comments;
   });
 };
