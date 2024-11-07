@@ -21,14 +21,19 @@ const theme = createTheme({
 function App() {
   return (
     <MantineProvider theme={theme} defaultColorScheme="dark">
-      <AppShell padding="md" header={{ height: 60 }}>
+      <AppShell padding="md" header={{ height: 100 }}>
         <AppShell.Header>
           <Group justify="space-between" h="100%" px="md">
-            <Text size="3rem">
-              <Center>
-                <Link to="/">[nc] 🗣NEWS</Link>
-              </Center>
-            </Text>
+            <Center>
+              <Link to="/">
+                <Text size="2rem" ta="left" fs="italic">
+                  [nc]
+                </Text>
+                <Text size="4rem" ta="right" fw={700}>
+                  🗣NEWS
+                </Text>
+              </Link>
+            </Center>
 
             <Group h="100%">
               <NavLink component={Link} to="/" label="🏠︎ Home" />

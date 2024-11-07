@@ -1,13 +1,23 @@
-import { Card, Text, Group, Badge } from "@mantine/core";
+import { Card, Text, Group, Badge, Space } from "@mantine/core";
 
 const CommentCard = ({ comment }) => {
   return (
     <Card withBorder shadow="sm" padding="lg" h="100%">
-      <Text ta="left"> {comment.body}</Text>
-
+      <Text ta="left" c="white">
+        {" "}
+        {comment.body}
+      </Text>
+      <Space h="xl" />
       <Group justify="space-between" component="section">
         <Badge size="lg">{comment.votes}</Badge>
-        <Badge tt="lowercase" mt="xs" color="black" size="md" fs="italic">
+        <Badge
+          tt="lowercase"
+          mt="xs"
+          color="green"
+          size="md"
+          fs="italic"
+          variant="dot"
+        >
           {comment.author}
         </Badge>
       </Group>
