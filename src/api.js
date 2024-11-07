@@ -19,7 +19,7 @@ export const getSingleArticle = (articleId) => {
 export const getComments = (articleId) => {
   const articleCommentsURL = `${ncNews}/api/articles/${articleId}/comments`;
   return axios.get(articleCommentsURL).then((response) => {
-    return response.data?.comments;
+    return response.data.comments;
   });
 };
 
@@ -31,4 +31,17 @@ export const updateVote = (articleId, voteAmount) => {
   return axios.patch(updateVoteURL, reqBody).then((response) => {
     return response.data?.article;
   });
+};
+
+export const postComment = (articleId, username, body) => {
+  const commentURL = `${ncNews}/api/articles/${articleId}/comments`;
+  const reqBody = { username, body };
+  return axios
+    .post(commentURL, reqBody)
+    .then(({ data }) => {
+      return data.comment;
+    })
+    .catch((err) => {
+      return "ERROR:", err;
+    });
 };

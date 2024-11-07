@@ -22,6 +22,10 @@ const SingleArticle = () => {
   const [article, setArticle] = useState(undefined);
 
   const handleUpVote = () => {
+    setArticle((pendingVote) => ({
+      ...pendingVote,
+      votes: pendingVote.votes + 1,
+    }));
     updateVote(article_id, 1)
       .then((articleResponse) => {
         setArticle(articleResponse);
@@ -32,6 +36,10 @@ const SingleArticle = () => {
   };
 
   const handleDownVote = () => {
+    setArticle((pendingVote) => ({
+      ...pendingVote,
+      votes: pendingVote.votes - 1,
+    }));
     updateVote(article_id, -1)
       .then((articleResponse) => {
         setArticle(articleResponse);
@@ -58,7 +66,7 @@ const SingleArticle = () => {
     <section>
       <Container>
         <Group justify="flex-start">
-          <Badge color="white" size="xl" tt="lowercase" variant="dot">
+          <Badge color="green" size="xl" tt="lowercase" variant="dot">
             {article.author}
           </Badge>
         </Group>
@@ -106,6 +114,9 @@ const SingleArticle = () => {
           >
             🡇
           </Button>
+
+          {/* 🡇 add in later, can be cosmetic if the function doesn't work 🡇
+
           <Button
             size="compact-md"
             color="maroon"
@@ -115,6 +126,8 @@ const SingleArticle = () => {
           >
             💬 {article.comment_count || 0} Comments
           </Button>
+
+          
           <Button
             size="compact-md"
             color="maroon"
@@ -123,7 +136,7 @@ const SingleArticle = () => {
             tt="capitalize"
           >
             ➦ Share
-          </Button>
+          </Button> */}
         </Group>
 
         <Divider size="md" my="lg" />
