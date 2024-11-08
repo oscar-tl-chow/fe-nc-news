@@ -132,7 +132,7 @@ const SingleArticle = () => {
             🡇
           </Button>
 
-          {/* 🡇 add in later, can be cosmetic if the function doesn't work 🡇
+          {/* 🡇 add in later, can be cosmetic if the function doesn't work 🡇 */}
 
           <Button
             size="compact-md"
@@ -144,7 +144,6 @@ const SingleArticle = () => {
             💬 {article.comment_count || 0} Comments
           </Button>
 
-          
           <Button
             size="compact-md"
             color="maroon"
@@ -153,7 +152,7 @@ const SingleArticle = () => {
             tt="capitalize"
           >
             ➦ Share
-          </Button> */}
+          </Button>
         </Group>
 
         <Divider size="md" my="lg" />

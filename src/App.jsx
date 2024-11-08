@@ -9,6 +9,7 @@ import {
   Text,
   NavLink,
   Flex,
+  Space,
 } from "@mantine/core";
 import Articles from "./components/Articles/Articles.jsx";
 import SingleArticle from "./components/SingleArticle/SingleArticle.jsx";
@@ -19,6 +20,9 @@ import { Notifications } from "@mantine/notifications";
 const theme = createTheme({
   defaultRadius: "2rem",
   primaryColor: "red",
+  defaultProps: {
+    popoverProps: { withinPortal: true },
+  },
 });
 
 function App() {
@@ -27,18 +31,26 @@ function App() {
       <Notifications position="top-right" zIndex={1000} />
       <AppShell header={{ height: 80 }}>
         <AppShell.Header>
-          <Group justify="space-between" h="100%" px="xl">
+          <Group justify="space-between" h="100%" px="md">
             <Center>
               <Link to="/">
-                <Text size="1.5rem" ta="left" fs="italic">
+                <Text size="1rem" ta="left" fw={500} fs="italic">
                   [nc]
                 </Text>
-                <Text size="3rem" ta="right" fw={700}>
-                  🗣NEWS
+                <Text size="2rem" ta="left" fw={700}>
+                  🗣
                 </Text>
               </Link>
-              <Flex direction="row" align="center" width="1rem">
-                <NavLink component={Link} to="/" label="🏠︎.Home" />
+              <Link to="/">
+                <Text size="3rem" ta="right" fw={900}>
+                  NEWS
+                </Text>
+              </Link>
+
+              <Space w="lg" />
+
+              <Flex direction="row" align="center" width="1rem" size="1rem">
+                <NavLink component={Link} to="/" size="1rem" label="🏠︎Home" />
                 <NavLink component={Link} to="/topics" label="☰󠀠󠀠Topics" />
               </Flex>
             </Center>

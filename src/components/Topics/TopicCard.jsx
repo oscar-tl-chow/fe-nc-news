@@ -17,7 +17,7 @@ const TopicCard = ({ topic }) => {
       to={`/topics/${topic.slug}`}
       className="article-card"
     >
-      <Group>
+      <Group grow>
         <Text fw={700} ta="center" size="xl" tt="capitalize">
           {topicTitle}
         </Text>
