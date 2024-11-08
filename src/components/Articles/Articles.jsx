@@ -83,6 +83,7 @@ const Articles = () => {
       <Title fw={500} ts="xl" fs="italic" ta="left">
         Articles
       </Title>
+      <Space h="lg" />
       <Group grow align="">
         <Switch
           size="xl"
@@ -108,7 +109,7 @@ const Articles = () => {
           return (
             <Grid.Col
               key={article.article_id}
-              span={{ base: 12, md: 6, lg: 4 }}
+              span={{ base: 12, md: 6, lg: 3 }}
             >
               <ArticleCard article={article} />
             </Grid.Col>
