@@ -5,7 +5,7 @@ const ArticleCard = ({ article }) => {
   return (
     <Card
       withBorder
-      shadow="xs"
+      shadow="xl"
       padding="md"
       h="100%"
       component={NavLink}
@@ -25,7 +25,7 @@ const ArticleCard = ({ article }) => {
           {article.title}
         </Text>
       </Group>
-      <Group mt="md" justify="flex-start" align="center">
+      <Group mt="md" justify="space-between" align="center">
         <Badge>{article.topic}</Badge>
         <Badge size="sm" justify="flex-end" color="blue" variant="filled">
           🗨 {article.comment_count || 0} Comments
