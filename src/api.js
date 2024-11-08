@@ -45,3 +45,10 @@ export const postComment = (articleId, username, body) => {
       return "ERROR:", err;
     });
 };
+
+export const deleteComment = (commentId) => {
+  const commentURL = `${ncNews}/api/comments/${commentId}`;
+  return axios.delete(commentURL).then((response) => {
+    return "Comment deleted:", response.data;
+  });
+};

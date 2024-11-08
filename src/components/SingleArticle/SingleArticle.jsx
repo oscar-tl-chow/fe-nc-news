@@ -8,6 +8,7 @@ import {
   Group,
   Button,
   Space,
+  rem,
 } from "@mantine/core";
 import { useState, useEffect } from "react";
 import { getSingleArticle, updateVote } from "../../api.js";
@@ -15,11 +16,16 @@ import { useParams } from "react-router-dom";
 import Loading from "../Loading";
 import Error from "../Error";
 import Comments from "./Comments.jsx";
+import { notifications } from "@mantine/notifications";
+import { IconX, IconCheck } from "@tabler/icons-react";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
-  const [error, setError] = useState(undefined);
-  const [article, setArticle] = useState(undefined);
+  const [error, setError] = useState(null);
+  const [article, setArticle] = useState([]);
+  const [votes, setVotes] = useState(0);
+
+  const xIcon = <IconX style={{ width: rem(20), height: rem(20) }} />;
 
   const handleUpVote = () => {
     setArticle((pendingVote) => ({
@@ -27,11 +33,16 @@ const SingleArticle = () => {
       votes: pendingVote.votes + 1,
     }));
     updateVote(article_id, 1)
-      .then((articleResponse) => {
-        setArticle(articleResponse);
+      .then(() => {
+        setVotes(votes + 1);
       })
       .catch((err) => {
-        setError(err);
+        notifications.show({
+          icon: xIcon,
+          title: "Error!",
+          message: `Oh no, an error has occurred: ${err}`,
+          color: "red",
+        });
       });
   };
 
@@ -41,11 +52,16 @@ const SingleArticle = () => {
       votes: pendingVote.votes - 1,
     }));
     updateVote(article_id, -1)
-      .then((articleResponse) => {
-        setArticle(articleResponse);
+      .then(() => {
+        setVotes(votes - 1);
       })
       .catch((err) => {
-        setError(err);
+        notifications.show({
+          icon: xIcon,
+          title: "Error!",
+          message: `An error has occurred: ${err}`,
+          color: "red",
+        });
       });
   };
 
@@ -53,6 +69,7 @@ const SingleArticle = () => {
     getSingleArticle(article_id)
       .then((articleResponse) => {
         setArticle(articleResponse);
+        setVotes(articleResponse.votes);
       })
       .catch((err) => {
         setError(err);

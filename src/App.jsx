@@ -12,6 +12,7 @@ import {
 import Articles from "./components/Articles/Articles.jsx";
 import SingleArticle from "./components/SingleArticle/SingleArticle.jsx";
 import Error from "./components/Error.jsx";
+import { Notifications } from "@mantine/notifications";
 
 const theme = createTheme({
   defaultRadius: "2rem",
@@ -21,6 +22,7 @@ const theme = createTheme({
 function App() {
   return (
     <MantineProvider theme={theme} defaultColorScheme="dark">
+      <Notifications position="top-right" zIndex={1000} />
       <AppShell padding="md" header={{ height: 100 }}>
         <AppShell.Header>
           <Group justify="space-between" h="100%" px="md">

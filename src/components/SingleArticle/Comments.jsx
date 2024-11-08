@@ -1,20 +1,28 @@
 import { getComments, postComment } from "../../api";
-import { useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { useState } from "react";
 import { Button, Group, Stack, Textarea } from "@mantine/core";
 import CommentCard from "./CommentCard";
 import { useForm } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
+import { UserContext } from "../UserContext/User";
 
 const Comments = ({ articleId }) => {
   const [comments, setComments] = useState([]);
   const [sendingComment, setSendingComment] = useState(false);
 
-  useEffect(() => {
+  const { user } = useContext(UserContext);
+
+  const refreshComments = useCallback(() => {
     getComments(articleId).then((commentResponse) => {
       setComments(commentResponse);
     });
   }, [articleId]);
+
+  useEffect(() => {
+    refreshComments();
+  }, [refreshComments]);
+
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -32,19 +40,17 @@ const Comments = ({ articleId }) => {
   const handleCommentSubmit = (values) => {
     setSendingComment(true);
 
-    const username = "grumpy19";
     const body = values.body;
 
-    postComment(articleId, username, body).then((comment) => {
+    postComment(articleId, user, body).then((comment) => {
       setComments((prevComments) => {
         form.reset();
         setSendingComment(false);
-
         return [comment, ...prevComments];
       });
       notifications.show({
-        title: "Comment posted!",
-        message: `Thank you for sharing your thoughts, ${username}!`,
+        title: "✔",
+        message: `Thanks, ${username}!`,
       });
     });
   };
@@ -77,7 +83,10 @@ const Comments = ({ articleId }) => {
         {comments.map((comment) => {
           return (
             <section key={comment.comment_id}>
-              <CommentCard comment={comment} />
+              <CommentCard
+                comment={comment}
+                refreshComments={refreshComments}
+              />
             </section>
           );
         })}
